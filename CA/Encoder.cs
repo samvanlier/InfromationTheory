@@ -14,7 +14,9 @@ namespace CA
         {
             Console.WriteLine("Making block code");
 
-            var toCode = model.Code.ToList();
+            var toCode = model.Code
+                .OrderBy(x => x.Symbol)
+                .ToList();
 
             var codeLength = (int)Math.Ceiling(Math.Log(toCode.Count, 2));
 

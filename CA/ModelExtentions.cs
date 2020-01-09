@@ -31,7 +31,9 @@ namespace CA
             model.Huffman.CalculateValues(model);
         }
 
-        public static void Print(this Model model)
+
+
+        public static string Print(this Model model)
         {
             var sb = new StringBuilder();
             var header = string.Format(_format,
@@ -43,7 +45,7 @@ namespace CA
 
             model.Print(sb);
 
-            Console.WriteLine(sb);
+            return sb.ToString();
         }
 
         private static void Print(this Model model, StringBuilder sb)

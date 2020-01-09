@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace CA
 {
@@ -28,9 +29,25 @@ namespace CA
 
             model.CalculateValues();
 
-            model.Print();
+            var result = model.Print();
+
+            //assume path
+            // run --path path
+            if (args.Length > 1)
+            {
+                var path = args[1];
+                WriteToFile(path, result);
+                Console.WriteLine($"DONE - file is @{path}");
+            }
+            else
+                Console.WriteLine(result);
 
             //Console.ReadKey();
+        }
+
+        private static void WriteToFile(string path, string result)
+        {
+            File.WriteAllText(path, result);
         }
     }
 }

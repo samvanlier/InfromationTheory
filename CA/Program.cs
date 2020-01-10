@@ -29,6 +29,8 @@ namespace CA
 
             model.CalculateValues();
 
+            Console.WriteLine();
+
             var result = model.Print();
 
             //assume path

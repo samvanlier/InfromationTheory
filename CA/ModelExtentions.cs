@@ -61,7 +61,7 @@ namespace CA
             var entropy = $"Entropy={model.Entropy}";
             var redundancy = $"Redundancy={model.Redundancy}";
 
-            var kraft = model.PrintKraft();
+            var kraft = model.PrintKraftAndEntropy();
             var length = model.PrintLength();
             var effeciency = model.PrintEffeciency();
 
@@ -74,26 +74,28 @@ namespace CA
             sb.Append(_breaker);
         }
 
-        private static string PrintKraft(this Model model)
+        private static string PrintKraftAndEntropy(this Model model)
         {
+            var entropy = string.Format("{0:N5}", model.Entropy);
             var block = model.BlockCode.Kraft;
             var sw = model.ShannonWeaver.Kraft;
             var sf = model.ShannonFano.Kraft;
             var huf = model.Huffman.Kraft;
 
             return string.Format(_format,
-               "", "", "Kraft =", block, sw, sf, huf);
+               "Entropy=", entropy, "Kraft =", block, sw, sf, huf);
         }
 
         private static string PrintLength(this Model model)
         {
+            var redun = string.Format("{0:N5}", model.Redundancy);
             var block = string.Format("{0:N5}", model.BlockCode.AverageLength);
             var sw = string.Format("{0:N5}", model.ShannonWeaver.AverageLength);
             var sf = string.Format("{0:N5}", model.ShannonFano.AverageLength);
             var huf = string.Format("{0:N5}", model.Huffman.AverageLength);
 
             return string.Format(_format,
-               "", "", "E(n) =", block, sw, sf, huf);
+               "Redun =", redun, "E(n) =", block, sw, sf, huf);
         }
 
         private static string PrintEffeciency(this Model model)
